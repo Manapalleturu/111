@@ -1,0 +1,1 @@
+(async()=>{const {data:{session}}=await getSupabase().auth.getSession();if(!session){location.href="login.html";return}const {data:profile}=await getSupabase().from("profiles").select("role").eq("id",session.user.id).single();if(!profile||profile.role!=="admin"){await getSupabase().auth.signOut();location.href="login.html"}})();
